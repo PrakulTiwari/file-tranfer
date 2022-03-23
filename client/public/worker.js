@@ -8,3 +8,4 @@ self.addEventListener("message", event => {
         array.push(event.data);
     }
 })
+//
