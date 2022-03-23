@@ -7,6 +7,8 @@ const io = socket(server);
 const path = require("path");
 const cors = require('cors');
 
+//dbtdtmkbjvdnbkvj
+
 app.use(cors({
     origin: '*'
 }));
