@@ -114,4 +114,5 @@ dist
 .yarn/build-state.yml
 .pnp.*
 
+/client
 /node_modules
