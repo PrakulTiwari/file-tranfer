@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import Peer from "simple-peer";
 import styled from "styled-components";
 import streamSaver from "streamsaver";
+import QRCode from "qrcode.react";
 
 const Container = styled.div`
     padding: 20px;
@@ -11,6 +12,7 @@ const Container = styled.div`
     width: 90%;
     margin: auto;
     flex-wrap: wrap;
+    flex-direction: column;
 `;
 
 const worker = new Worker("../worker.js");
@@ -29,7 +31,7 @@ const Room = (props) => {
     const roomID = props.match.params.roomID;
 
     useEffect(() => {
-        socketRef.current = io.connect("/");
+        socketRef.current = io.connect("https://ancient-oasis-24010.herokuapp.com/");
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", users => {
             peerRef.current = createPeer(users[0], socketRef.current.id);
@@ -153,11 +155,17 @@ const Room = (props) => {
             </div>
         );
     }
-
+    let qrcode = (
+        <div>
+            <QRCode
+               value={window.location.href} style={{ marginLeft: 50 }}/>
+        </div>
+    )
     return (
         <Container>
             {body}
             {downloadPrompt}
+            {qrcode}
         </Container>
     );
 };
